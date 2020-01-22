@@ -1,11 +1,12 @@
 import React from "react";
 import "./App.css";
-import NotificationButton from "./components/NotificationButton";
+import { GetTokenButton, NotificationButton } from "./components/";
 
 const App: React.FC = () => {
   return (
     <div className="App">
       <header className="App-header">
+        <GetTokenButton />
         <NotificationButton />
       </header>
     </div>
