@@ -1,0 +1,77 @@
+{
+	"info": {
+		"_postman_id": "edb22a85-a660-47f3-86ec-1f03473bb3fe",
+		"name": "commit-gardener",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "fcm-send",
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json",
+						"type": "text"
+					},
+					{
+						"key": "Authorization",
+						"value": "key=SECRET_KEY",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n  \"notification\": {\n    \"title\": \"First push\",\n    \"body\": \"Push Message!\",\n    \"icon\": \"firebase-logo.png\",\n    \"click_action\": \"http://localhost:3000\"\n  },\n  \"to\": \"ctol3tKucTYpSAxXQfl35N:APA91bEV2DofBjfJUh4Nc3zM_B8qD9JcjfMDqveFwgQHomd0Xfefgq7THG_1TOG6z7NpiBZIuHViVl-flekcAumpfvcEjgMtxmRDtrqld50UYvrjIEUDGufSMoqptMtC1b577pAgk25-\"\n}"
+				},
+				"url": {
+					"raw": "https://fcm.googleapis.com/fcm/send",
+					"protocol": "https",
+					"host": [
+						"fcm",
+						"googleapis",
+						"com"
+					],
+					"path": [
+						"fcm",
+						"send"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "v1-notification",
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"name": "Content-Type",
+						"value": "application/json",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"to\": \"ctol3tKucTYpSAxXQfl35N:APA91bEV2DofBjfJUh4Nc3zM_B8qD9JcjfMDqveFwgQHomd0Xfefgq7THG_1TOG6z7NpiBZIuHViVl-flekcAumpfvcEjgMtxmRDtrqld50UYvrjIEUDGufSMoqptMtC1b577pAgk25-\"\n}"
+				},
+				"url": {
+					"raw": "http://localhost:8080/v1/notification",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"v1",
+						"notification"
+					]
+				}
+			},
+			"response": []
+		}
+	],
+	"protocolProfileBehavior": {}
+}
