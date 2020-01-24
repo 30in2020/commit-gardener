@@ -1,7 +1,7 @@
 import React, { useEffect } from "react";
 import PushNotification from "../push-notification";
 
-const GetTokenButton = () => {
+const GetFirebaseTokenButton = () => {
   useEffect(() => {
     PushNotification.getMessage();
   }, []);
@@ -12,4 +12,4 @@ const GetTokenButton = () => {
   );
 };
 
-export { GetTokenButton };
+export { GetFirebaseTokenButton };

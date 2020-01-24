@@ -1,5 +1,9 @@
 import { admin } from "./firebase";
 import app from "./express";
+import axios from "axios";
+const env = require("dotenv").config({
+  path: __dirname + "/.env"
+}).parsed;
 
 interface ICustomRequest<T> extends Express.Request {
   body: T;
@@ -45,5 +49,20 @@ app.post(
     }
   }
 );
+
+app.get("/callback", (req, res) => {
+  console.log("callback");
+  const requestToken = req.query.code;
+  axios({
+    method: "post",
+    url: `https://github.com/login/oauth/access_token?client_id=${env.GITHUB_CLIENT_ID}&client_secret=${env.GITHUB_CLIENT_SECRET}&code=${requestToken}`,
+    headers: {
+      accept: "application/json"
+    }
+  }).then(response => {
+    const accessToken = response.data.access_token;
+    console.log(accessToken);
+  });
+});
 
 app.listen(8080, () => console.log(`Example app listening on port ${8080}!`));
