@@ -1,5 +1,4 @@
 import React, { useCallback } from "react";
-import PushNotification from "../push-notification";
 
 const GetGithubAccessTokenButton = () => {
   const handleClick = useCallback(() => {

@@ -80,21 +80,11 @@ class PushNotification {
     PushNotification.messaging.usePublicVapidKey(
       process.env.REACT_APP_PUBLIC_KEY as string
     );
-    // Add the public key generated from the console here.
-    // [START receive_message]
-    // Handle incoming messages. Called when:
-    // - a message is received while the app has focus
-    // - the user clicks on an app notification created by a service worker
-    //   `messaging.setBackgroundMessageHandler` handler.
+
     PushNotification.messaging.onMessage((payload: object) => {
       console.log("Message received. ", payload);
-      // [START_EXCLUDE]
-      // Update the UI to include the received message.
-      //appendMessage(payload);
       console.log(payload);
-      // [END_EXCLUDE]
     });
-    // [END receive_message]
   };
 
   static sendNotification = (
