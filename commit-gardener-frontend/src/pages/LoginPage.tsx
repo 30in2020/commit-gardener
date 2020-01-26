@@ -41,7 +41,7 @@ const LoginPage: React.FC = () => {
         setError(e.message);
       }
     })();
-  }, []);
+  }, [history, location]);
 
   if (error) {
     return <div>Error! Start from beginning!</div>;

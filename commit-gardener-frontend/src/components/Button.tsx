@@ -1,4 +1,4 @@
-import React, { useCallback } from "react";
+import React from "react";
 
 interface IProps {
   onClick: (event: React.MouseEvent<HTMLElement>) => void;
