@@ -35,32 +35,25 @@ class PushNotification {
     try {
       const permission = await Notification.requestPermission();
       if (permission === "granted") {
-        console.log("Notification permission granted.");
-        await PushNotification.getToken();
+        const token = await PushNotification.getToken();
+        return token;
       } else {
-        console.log("Unable to get permission to notify.");
+        throw new Error("PUSH:PERMISSION_DENIED");
       }
     } catch (error) {
       console.error(error);
+      throw error;
     }
   };
 
   static getToken = async () => {
-    PushNotification.messaging
-      .getToken()
-      .then((currentToken: string) => {
-        if (currentToken) {
-          console.log(currentToken);
-          localStorage.setItem("token", currentToken);
-        } else {
-          console.log(
-            "No Instance ID token available. Request permission to generate one."
-          );
-        }
-      })
-      .catch((err: Error) => {
-        console.error("An error occurred while retrieving token. ", err);
-      });
+    try {
+      const currentToken = await PushNotification.messaging.getToken();
+      return currentToken;
+    } catch (e) {
+      console.error(e);
+      throw e;
+    }
   };
 
   static updateToken = async () => {

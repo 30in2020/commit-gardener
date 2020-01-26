@@ -1,3 +1,3 @@
 export * from "./GetFirebaseTokenButton";
 export * from "./NotificationButton";
-export * from "./GetGithubAccessTokenButton";
+export * from "./Button";
