@@ -1,21 +1,26 @@
 import "reflect-metadata";
-import {createConnection} from "typeorm";
-import {User} from "./entity/User";
+import { createConnection } from "typeorm";
+import { buildSchema } from "type-graphql";
+import { ApolloServer } from "apollo-server";
+import { UserResolver } from "./resolvers/UserResolver";
+import { User } from "./entity/User";
 
-createConnection().then(async connection => {
+(async function main() {
+  await createConnection();
 
-    console.log("Inserting a new user into the database...");
-    const user = new User();
-    user.firstName = "Timber";
-    user.lastName = "Saw";
-    user.age = 25;
-    await connection.manager.save(user);
-    console.log("Saved a new user with id: " + user.id);
+  const user = new User();
+  user.userId = "30in2020";
+  user.email = "30in2020@gmail.com";
+  user.accessToken = "1234";
+  user.deviceToken = "1234";
+  user.createDate = new Date();
+  await user.save();
 
-    console.log("Loading users from the database...");
-    const users = await connection.manager.find(User);
-    console.log("Loaded users: ", users);
+  const schema = await buildSchema({
+    resolvers: [UserResolver]
+  });
 
-    console.log("Here you can setup and run express/koa/any other framework.");
-
-}).catch(error => console.log(error));
+  const server = new ApolloServer({ schema });
+  await server.listen(4000);
+  console.log("Server has started!");
+})();
