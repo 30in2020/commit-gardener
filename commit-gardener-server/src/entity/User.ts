@@ -1,6 +1,13 @@
-import { Entity, BaseEntity, PrimaryGeneratedColumn, Column } from "typeorm";
-import { ObjectType, Field, ID } from "type-graphql";
-import { IsEmail, IsDate } from "class-validator";
+import {
+  Entity,
+  BaseEntity,
+  PrimaryGeneratedColumn,
+  Column,
+  CreateDateColumn,
+  UpdateDateColumn
+} from "typeorm";
+import { InputType, ObjectType, Field, ID } from "type-graphql";
+import { IsEmail } from "class-validator";
 
 @Entity()
 @ObjectType()
@@ -34,10 +41,21 @@ export class User extends BaseEntity {
   })
   deviceToken: string;
 
-  @Field(() => Date)
-  @Column({
-    nullable: true
-  })
-  @IsDate()
-  createDate: Date;
+  @CreateDateColumn()
+  createdAt: string;
+
+  @UpdateDateColumn({ type: "timestamp" })
+  updatedAt: number;
+}
+
+@InputType()
+export class CreateUserInput {
+  @Field()
+  userId: string;
+  @Field()
+  email: string;
+  @Field()
+  accessToken: string;
+  @Field()
+  deviceToken: string;
 }

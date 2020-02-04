@@ -13,7 +13,6 @@ import { User } from "./entity/User";
   user.email = "30in2020@gmail.com";
   user.accessToken = "1234";
   user.deviceToken = "1234";
-  user.createDate = new Date();
   await user.save();
 
   const schema = await buildSchema({
